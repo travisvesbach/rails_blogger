@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
 	include ArticlesHelper
+	before_action :require_login, except: [:show, :index]
 
 	def index
 		@articles = Article.all
@@ -36,8 +37,9 @@ class ArticlesController < ApplicationController
 	end
 
 	def destroy
-		flash.notice = "Article '#{Article.find(params[:id]).title}' Deleted!"
-		Article.find(params[:id]).destroy
+		@article = Article.find(params[:id])
+		flash.notice = "Article '#{@article.title}' Deleted!"
+		@article.destroy
 
 		redirect_to articles_path
 	end
