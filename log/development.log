@@ -4526,3 +4526,686 @@ Processing by TagsController#index as HTML
 Completed 200 OK in 40ms (Views: 37.4ms | ActiveRecord: 0.4ms)
 
 
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPaperclipFieldsToArticle (20170711151155)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "articles" ADD "image_file_name" varchar[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "articles" ADD "image_content_type" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "articles" ADD "image_file_size" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "articles" ADD "image_updated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170711151155"]]
+  [1m[35m (90.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_article_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_article_id' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_article_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_article_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+[0m
+Started GET "/tags/4" for 127.0.0.1 at 2017-07-11 10:19:42 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 4]]
+  Rendered tags/show.html.erb within layouts/application (59.1ms)
+Completed 200 OK in 394ms (Views: 305.4ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/articles/10" for 127.0.0.1 at 2017-07-11 10:19:44 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 10]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 10]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (48.3ms)
+  Rendered articles/show.html.erb within layouts/application (75.0ms)
+Completed 200 OK in 139ms (Views: 104.9ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2017-07-11 10:19:45 -0500
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 53ms (Views: 36.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2017-07-11 10:19:47 -0500
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (43.8ms)
+  Rendered articles/new.html.erb within layouts/application (75.5ms)
+Completed 200 OK in 119ms (Views: 107.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2017-07-11 10:20:42 -0500
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9XoY+h1Y9NOpvTgzLrkVvP5RwxNNkAXKYTErtbIYdyP1MqrUQPLiWR887/xDYJi7WlGoqPlfcyRFwdN+kRTWxg==", "article"=>{"title"=>"Dog", "body"=>"dog", "tag_list"=>"tag1", "image"=>#<ActionDispatch::Http::UploadedFile:0x007ff444b47d38 @tempfile=#<Tempfile:/tmp/RackMultipart20170711-3905-z9j3k1.jpg>, @original_filename="dog.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"dog.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Create Article"}
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+Command :: file -b --mime '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1ihl5cp.jpg'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+Command :: file -b --mime '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-171h29a.jpg'
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "articles" ("title", "body", "created_at", "updated_at", "image_file_name", "image_content_type", "image_file_size", "image_updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Dog"], ["body", "dog"], ["created_at", "2017-07-11 15:20:42.422184"], ["updated_at", "2017-07-11 15:20:42.422184"], ["image_file_name", "dog.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 8337], ["image_updated_at", "2017-07-11 15:20:42.403554"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 1], ["article_id", 12], ["created_at", "2017-07-11 15:20:42.428112"], ["updated_at", "2017-07-11 15:20:42.428112"]]
+  [1m[35m (105.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 182ms (ActiveRecord: 107.8ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:20:42 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (3.3ms)
+  Rendered articles/show.html.erb within layouts/application (15.9ms)
+Completed 200 OK in 44ms (Views: 39.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2017-07-11 10:21:31 -0500
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 23ms (Views: 21.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:21:32 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (1.0ms)
+  Rendered articles/comments/_form.html.erb (0.9ms)
+  Rendered articles/show.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 22ms (Views: 19.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2017-07-11 10:21:33 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/_form.html.erb (12.9ms)
+  Rendered articles/edit.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 65ms (Views: 48.8ms | ActiveRecord: 0.9ms)
+
+
+Started PATCH "/articles/1" for 127.0.0.1 at 2017-07-11 10:21:38 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wm1hO1oazTp1u/CQ3mJqkU0QdHVxUvOJe2A47bgXteVkZshik5w8wWuecGeJwxRMifGOcnnuZ35bD8l9w8yiRQ==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo hoo!", "tag_list"=>"tag1, tag2", "image"=>#<ActionDispatch::Http::UploadedFile:0x007ff446374dc0 @tempfile=#<Tempfile:/tmp/RackMultipart20170711-3905-1hrtodx.png>, @original_filename="beast.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"beast.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag2"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+Command :: file -b --mime '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-1gzbo8n.png'
+Command :: file -b --mime '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-g0qwsm.png'
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE "articles" SET "image_file_name" = ?, "image_content_type" = ?, "image_file_size" = ?, "image_updated_at" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["image_file_name", "beast.png"], ["image_content_type", "image/png"], ["image_file_size", 27720], ["image_updated_at", "2017-07-11 15:21:38.813848"], ["updated_at", "2017-07-11 15:21:38.824186"], ["id", 1]]
+  [1m[35m (56.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 97ms (ActiveRecord: 59.3ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:21:38 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (2.0ms)
+  Rendered articles/comments/_form.html.erb (2.0ms)
+  Rendered articles/show.html.erb within layouts/application (20.2ms)
+Completed 200 OK in 49ms (Views: 42.6ms | ActiveRecord: 2.0ms)
+
+
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:23:43 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (1.5ms)
+  Rendered articles/comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 38ms (Views: 33.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/tags/1" for 127.0.0.1 at 2017-07-11 10:23:45 -0500
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 1]]
+  Rendered tags/show.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 33ms (Views: 28.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:23:46 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (2.8ms)
+  Rendered articles/show.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 44ms (Views: 39.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2017-07-11 10:23:49 -0500
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 38ms (Views: 34.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:25:54 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (0.6ms)
+  Rendered articles/comments/_form.html.erb (0.7ms)
+  Rendered articles/show.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 18ms (Views: 16.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2017-07-11 10:25:55 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/_form.html.erb (29.0ms)
+  Rendered articles/edit.html.erb within layouts/application (30.6ms)
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `iamge' for #<Article:0x007ff445fe76d0>
+Did you mean?  image):
+    18: 	</p>
+    19: 	<p>
+    20: 		<% if @article.image.exists? %>
+    21: 			<%= image_tag @article.iamge.url %>
+    22: 		<% end %>
+    23: 		<%= f.label :image, "Attach an Image" %><br>
+    24: 		<%= f.file_field :image %>
+  
+app/views/articles/_form.html.erb:21:in `block in _app_views_articles__form_html_erb__2349201230878118906_70343511960840'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__2349201230878118906_70343511960840'
+app/views/articles/edit.html.erb:3:in `_app_views_articles_edit_html_erb__809900350113339997_70343561520220'
+Started GET "/articles/1/edit" for 127.0.0.1 at 2017-07-11 10:26:37 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/_form.html.erb (10.6ms)
+  Rendered articles/edit.html.erb within layouts/application (13.2ms)
+Completed 200 OK in 41ms (Views: 36.5ms | ActiveRecord: 0.9ms)
+
+
+Started PATCH "/articles/1" for 127.0.0.1 at 2017-07-11 10:26:43 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"giycwFRuDqFuCVHfG8Ql06KvGECi4BYmreZMKY9qJbe9JdMMAZS2lDff6MeLYHUQHMi5LGG/PlggVCMYgksidg==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo hoo!", "tag_list"=>"tag1, tag2"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag2"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:26:43 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (0.4ms)
+  Rendered articles/comments/_form.html.erb (0.6ms)
+  Rendered articles/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tags/1" for 127.0.0.1 at 2017-07-11 10:26:45 -0500
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 1]]
+  Rendered tags/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 11ms (Views: 10.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:26:46 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (2.8ms)
+  Rendered articles/show.html.erb within layouts/application (15.3ms)
+Completed 200 OK in 41ms (Views: 36.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/12/edit" for 127.0.0.1 at 2017-07-11 10:26:47 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered articles/_form.html.erb (12.2ms)
+  Rendered articles/edit.html.erb within layouts/application (14.6ms)
+Completed 200 OK in 40ms (Views: 36.3ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/articles/12" for 127.0.0.1 at 2017-07-11 10:26:52 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5vQdm/UN6/uivSdCgPyRvmJ2Jh4EzoYULpI+RQYlrTGFtSqN4A0F7/Wr/EUn6XoCU/W8LKGtMsr+0LadLIHYTg==", "article"=>{"title"=>"Dog", "body"=>"dog", "tag_list"=>"tag1"}, "commit"=>"Update Article", "id"=>"12"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:26:52 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (0.6ms)
+  Rendered articles/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2017-07-11 10:26:54 -0500
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 37ms (Views: 34.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:29:20 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (0.5ms)
+  Rendered articles/comments/_form.html.erb (1.0ms)
+  Rendered articles/show.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 39ms (Views: 26.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/system/articles/images/000/000/001/medium/beast.png?1499786498" for 127.0.0.1 at 2017-07-11 10:29:20 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/system/articles/images/000/000/001/medium/beast.png"):
+  
+actionpack (5.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.2) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/articles/1/edit" for 127.0.0.1 at 2017-07-11 10:30:38 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/_form.html.erb (3.0ms)
+  Rendered articles/edit.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/system/articles/images/000/000/001/medium/beast.png?1499786498" for 127.0.0.1 at 2017-07-11 10:30:38 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/system/articles/images/000/000/001/medium/beast.png"):
+  
+actionpack (5.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.2) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started PATCH "/articles/1" for 127.0.0.1 at 2017-07-11 10:30:43 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EXzXxEQXr+hgad7AQXkgXF/vYCX/8sRrE5hTD0GuKPEvd36djZFeE35MXjcW2F6Bmw6aIvdOUJwz96KfOnU/UQ==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo hoo!", "tag_list"=>"tag1, tag2", "image"=>#<ActionDispatch::Http::UploadedFile:0x007ff446794d88 @tempfile=#<Tempfile:/tmp/RackMultipart20170711-3905-1wcb6sc.png>, @original_filename="beast.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"beast.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag2"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+Command :: file -b --mime '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-1gpupw2.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]'
+Command :: convert '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]' -auto-orient -resize "300x300>" '/tmp/1e437f284853ffbc521ef6fd3e50103520170711-3905-eb58rx'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]'
+Command :: convert '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-13jma3t.png[0]' -auto-orient -resize "100x100>" '/tmp/1e437f284853ffbc521ef6fd3e50103520170711-3905-bdbfb5'
+Command :: file -b --mime '/tmp/b878bc127cdb631d4fea3580fccceaa020170711-3905-1kni09z.png'
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "articles" SET "image_file_name" = ?, "image_updated_at" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["image_file_name", "beast.png"], ["image_updated_at", "2017-07-11 15:30:43.096354"], ["updated_at", "2017-07-11 15:30:43.607879"], ["id", 1]]
+[paperclip] deleting /home/travis/programming/the_odin_project/rails_blogger/public/system/articles/images/000/000/001/original/beast.png
+  [1m[35m (125.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 658ms (ActiveRecord: 126.6ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:30:43 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (1.5ms)
+  Rendered articles/comments/_form.html.erb (1.9ms)
+  Rendered articles/show.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 41ms (Views: 36.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/tags/1" for 127.0.0.1 at 2017-07-11 10:30:46 -0500
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTag Load (0.6ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 1]]
+  Rendered tags/show.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 33ms (Views: 28.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:30:46 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (0.7ms)
+  Rendered articles/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/system/articles/images/000/000/012/medium/dog.jpg?1499786442" for 127.0.0.1 at 2017-07-11 10:30:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/system/articles/images/000/000/012/medium/dog.jpg"):
+  
+actionpack (5.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.2) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/articles/12/edit" for 127.0.0.1 at 2017-07-11 10:30:49 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.6ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered articles/_form.html.erb (14.1ms)
+  Rendered articles/edit.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 43ms (Views: 38.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/system/articles/images/000/000/012/medium/dog.jpg?1499786442" for 127.0.0.1 at 2017-07-11 10:30:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/system/articles/images/000/000/012/medium/dog.jpg"):
+  
+actionpack (5.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.2) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.2) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started PATCH "/articles/12" for 127.0.0.1 at 2017-07-11 10:30:54 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YXNUX9O26Cf2mz41Xovx9B+avAART7OorifXwPVZwIoCMmNJxrYGM6GN5TL5nhpILhkmMrQsB3Z+ZV8Y3/219Q==", "article"=>{"title"=>"Dog", "body"=>"dog", "tag_list"=>"tag1", "image"=>#<ActionDispatch::Http::UploadedFile:0x007ff445963750 @tempfile=#<Tempfile:/tmp/RackMultipart20170711-3905-1uq0j4n.jpg>, @original_filename="dog.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"dog.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Update Article", "id"=>"12"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+Command :: file -b --mime '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1ga6u5v.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]'
+Command :: convert '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]' -auto-orient -resize "300x300>" '/tmp/6c3f9a1ec53b7c95ba4cca057c271fbe20170711-3905-1qsh6fb'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]'
+Command :: convert '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-1y9bvk7.jpg[0]' -auto-orient -resize "100x100>" '/tmp/6c3f9a1ec53b7c95ba4cca057c271fbe20170711-3905-16e5ppb'
+Command :: file -b --mime '/tmp/06d80eb0c50b49a509b49f2424e8c80520170711-3905-bt65vq.jpg'
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "articles" SET "image_file_name" = ?, "image_updated_at" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["image_file_name", "dog.jpg"], ["image_updated_at", "2017-07-11 15:30:54.188513"], ["updated_at", "2017-07-11 15:30:54.304663"], ["id", 12]]
+[paperclip] deleting /home/travis/programming/the_odin_project/rails_blogger/public/system/articles/images/000/000/012/original/dog.jpg
+  [1m[35m (142.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 278ms (ActiveRecord: 143.3ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:30:54 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (3.1ms)
+  Rendered articles/show.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 41ms (Views: 36.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/12/edit" for 127.0.0.1 at 2017-07-11 10:30:59 -0500
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered articles/_form.html.erb (2.7ms)
+  Rendered articles/edit.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/articles/12" for 127.0.0.1 at 2017-07-11 10:31:02 -0500
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FszOWSbSexmhQqZ5mG2hlXIyZmoQzPcslCrqHZVTy8Z1jflPM9KVDfZUfX4/eEopQ7H8WLWvQ/JEaGLFv/e+uQ==", "article"=>{"title"=>"Dog", "body"=>"dog", "tag_list"=>"tag1"}, "commit"=>"Update Article", "id"=>"12"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "tag1"], ["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 14ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:31:02 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered articles/comments/_form.html.erb (1.2ms)
+  Rendered articles/show.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 23ms (Views: 20.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2017-07-11 10:33:10 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection of articles/_comment.html.erb [0 times] (0.1ms)
+  Rendered articles/comments/_form.html.erb (2.8ms)
+  Rendered articles/show.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 73ms (Views: 68.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2017-07-11 10:33:12 -0500
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 35ms (Views: 32.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2017-07-11 10:33:15 -0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection of articles/_comment.html.erb [3 times] (1.5ms)
+  Rendered articles/comments/_form.html.erb (1.8ms)
+  Rendered articles/show.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 43ms (Views: 37.8ms | ActiveRecord: 1.3ms)
+
+
